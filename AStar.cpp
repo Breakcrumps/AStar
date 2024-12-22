@@ -20,7 +20,7 @@ int main()
   cin >> height >> length;
   cin.ignore();
 
-  Pos human_location, mouse_location, finish_location;
+  Pos human_pos, mouse_pos, finish_pos;
   string field[height];
 
   for (int line_index = 0; line_index < height; ++line_index)
@@ -34,18 +34,18 @@ int main()
 
     if (line.find('H') != -1)
     {
-      human_location.x = line.find('H');
-      human_location.y = line_index;
+      human_pos.x = line.find('H');
+      human_pos.y = line_index;
     }
     if (line.find('M') != -1)
     {
-      mouse_location.x = line.find('M');
-      mouse_location.y = line_index;
+      mouse_pos.x = line.find('M');
+      mouse_pos.y = line_index;
     }
     if (line.find('F') != -1)
     {
-      finish_location.x = line.find('F');
-      finish_location.y = line_index;
+      finish_pos.x = line.find('F');
+      finish_pos.y = line_index;
     }
   }
 
@@ -57,7 +57,7 @@ int main()
     {
       human_field[y].push_back(
         field[y][x] != 'W'
-        ? (int)((abs(finish_location.y - y) + 1) / 2) + (int)((abs(finish_location.x - x) + 1) / 2)
+        ? (int)((abs(finish_pos.y - y) + 1) / 2) + (int)((abs(finish_pos.x - x) + 1) / 2)
         : -1
       );
     }
@@ -78,7 +78,7 @@ int main()
   // double start_time = clock() / CLOCKS_PER_SEC;
 
   int human_moves = human_function(
-    human_location,
+    human_pos,
     human_field,
     (height * length) - 1,
     height,
@@ -98,8 +98,8 @@ int main()
       mouse_field[y].push_back
       (
         field[y][x] != 'W'
-        ? abs(finish_location.y - y) + abs(finish_location.x - x)
-        : -(abs(finish_location.y - y) + abs(finish_location.x - x))
+        ? abs(finish_pos.y - y) + abs(finish_pos.x - x)
+        : -(abs(finish_pos.y - y) + abs(finish_pos.x - x))
       );
     }
   }
@@ -114,7 +114,7 @@ int main()
   }
   cout << '\n';
 
-  int mouse_moves = mouse_function(mouse_location, mouse_field, (height * length) - 1, height, length);
+  int mouse_moves = mouse_function(mouse_pos, mouse_field, (height * length) - 1, height, length);
 
   cout << mouse_moves << "\n\n";
   

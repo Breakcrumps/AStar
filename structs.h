@@ -10,8 +10,7 @@ using std::size_t;
 
 struct Pos
 {
-  int x;
-  int y;
+  int x, y;
 
   bool operator==(Pos other) const
   {

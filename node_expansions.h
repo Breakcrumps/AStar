@@ -29,14 +29,12 @@ void expand_human_node(
     Pos next_pos = current_node.pos + move;
 
     if (not human_pos_is_good(human_field, came_from, cost_so_far, current_node, next_pos, length, height))
-    {
       continue;
-    }
 
     Node next_node(
-      human_field[current_node.pos.y + move.y][current_node.pos.x + move.x],
+      human_field[next_pos.y][next_pos.x],
       next_pos,
-      current_node.turn+1
+      current_node.turn + 1
     );
 
     frontier.push(next_node);
@@ -46,14 +44,12 @@ void expand_human_node(
     Pos second_next_pos = next_node.pos + move;
 
     if (not human_second_pos_is_good(human_field, second_next_pos, length, height))
-    {
       continue;
-    }
 
     Node second_next(
-      human_field[current_node.pos.y + move.y*2][current_node.pos.x + move.x*2],
+      human_field[second_next_pos.y][second_next_pos.x],
       second_next_pos,
-      current_node.turn+1
+      current_node.turn + 1
     );
 
     frontier.push(second_next);
@@ -80,20 +76,18 @@ void expand_mouse_node(
     bool climbed = current_node.climbed;
 
     if (not mouse_pos_is_good(mouse_field, came_from, cost_so_far, current_node, next_pos, length, height, climbed))
-    {
       continue;
-    }
 
-    MouseNode next
+    MouseNode next_node
     (
-      abs(mouse_field[current_node.pos.y + move.y][current_node.pos.x + move.x]),
-      { current_node.pos.x + move.x, current_node.pos.y + move.y },
-      current_node.turn+1,
+      abs(mouse_field[next_pos.y][next_pos.x]),
+      next_pos,
+      current_node.turn + 1,
       climbed
     );
 
-    frontier.push(next);
-    came_from[next.pos] = current_node.pos;
-    cost_so_far[next.pos] = { next.turn, next.climbed };
+    frontier.push(next_node);
+    came_from[next_node.pos] = current_node.pos;
+    cost_so_far[next_node.pos] = { next_node.turn, next_node.climbed };
   }
 }

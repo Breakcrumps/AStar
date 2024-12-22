@@ -21,25 +21,17 @@ bool human_pos_is_good(
 )
 {
   if (not pos_exists(next_pos, length, height))
-  {
     return false;
-  }
   if (pos_is_a_wall(human_field, next_pos))
-  {
     return false;
-  }
 
   if (came_from[current_node.pos] == next_pos)
-  {
     return false;
-  }
   if (
     cost_so_far.find(next_pos) != cost_so_far.end()
     and cost_so_far[next_pos] < current_node.turn + 1
   )
-  {
     return false;
-  }
 
   return true;
 }
@@ -70,30 +62,23 @@ bool mouse_pos_is_good(
 )
 {
   if (not pos_exists(next_pos, length, height))
-  {
     return false;
-  }
   if (pos_is_a_wall(mouse_field, next_pos))
   {
     if (climbed)
-    {
       return false;
-    }
+      
     climbed = true;
   }
 
   if (came_from[current_node.pos] == next_pos)
-  {
     return false;
-  }
   if (
     cost_so_far.find(next_pos) != cost_so_far.end()
     and cost_so_far[next_pos].first < current_node.turn + 1
     and cost_so_far[next_pos].second <= climbed
   )
-  {
     return false;
-  }
 
   return true;
 }

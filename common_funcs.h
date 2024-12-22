@@ -21,10 +21,7 @@ bool reached_the_finish(MouseNode const (&current_node))
 
 /////////////////////////////////////////////////////////////////////////////////
 
-bool pos_exists(
-  Pos next_pos,
-  int length, int height
-)
+bool pos_exists(Pos next_pos, int length, int height)
 {
   return
     next_pos.x >= 0 and next_pos.x < length
@@ -33,10 +30,7 @@ bool pos_exists(
 
 /////////////////////////////////////////////////////////////////////////////////
 
-bool pos_is_a_wall(
-  vector<int> const (&field)[],
-  Pos next_pos
-)
+bool pos_is_a_wall(vector<int> const (&field)[], Pos next_pos)
 {
   return field [next_pos.y] [next_pos.x] < 0;
 }
