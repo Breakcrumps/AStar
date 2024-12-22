@@ -16,20 +16,18 @@ bool human_pos_is_good(
   unordered_map<Pos, Pos, HashPos>& came_from,
   unordered_map<Pos, int, HashPos>& cost_so_far,
   Node const (&current_node),
-  Pos move,
+  Pos next_pos,
   int length, int height
 )
 {
-  if (not pos_exists(current_node.pos, move, length, height))
+  if (not pos_exists(next_pos, length, height))
   {
     return false;
   }
-  if (pos_is_a_wall(human_field, current_node.pos, move))
+  if (pos_is_a_wall(human_field, next_pos))
   {
     return false;
   }
-
-  Pos next_pos { current_node.pos.x + move.x, current_node.pos.y + move.y };
 
   if (came_from[current_node.pos] == next_pos)
   {
@@ -50,14 +48,13 @@ bool human_pos_is_good(
 
 bool human_second_pos_is_good(
   vector<int> const (&human_field)[],
-  Node const (&current_node),
-  Pos move,
+  Pos next_pos,
   int length, int height
 )
 {
   return
-    pos_exists(current_node.pos, move, length, height)
-    and not pos_is_a_wall(human_field, current_node.pos, move);
+    pos_exists(next_pos, length, height)
+    and not pos_is_a_wall(human_field, next_pos);
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -67,16 +64,16 @@ bool mouse_pos_is_good(
   unordered_map<Pos, Pos, HashPos>& came_from,
   unordered_map<Pos, pair<int, bool>, HashPos>& cost_so_far,
   MouseNode const (&current_node),
-  Pos move,
+  Pos next_pos,
   int length, int height,
   bool& climbed
 )
 {
-  if (not pos_exists(current_node.pos, move, length, height))
+  if (not pos_exists(next_pos, length, height))
   {
     return false;
   }
-  if (pos_is_a_wall(mouse_field, current_node.pos, move))
+  if (pos_is_a_wall(mouse_field, next_pos))
   {
     if (climbed)
     {
@@ -84,8 +81,6 @@ bool mouse_pos_is_good(
     }
     climbed = true;
   }
-
-  Pos next_pos { current_node.pos.x + move.x, current_node.pos.y + move.y };
 
   if (came_from[current_node.pos] == next_pos)
   {

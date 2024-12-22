@@ -14,7 +14,7 @@ using std::vector, std::priority_queue, std::unordered_map;
 /////////////////////////////////////////////////////////////////////////////////
 
 int human_function(
-  Pos start,
+  Pos start_pos,
   vector<int> const (&human_field)[],
   int max_turns,
   int height,
@@ -25,13 +25,13 @@ int human_function(
 
   priority_queue<Node, vector<Node>, PrioritiseNode> frontier;
 
-  Node first_node(human_field[start.y][start.x], start);
+  Node first_node(human_field[start_pos.y][start_pos.x], start_pos);
 
   frontier.push(first_node);
 
-  unordered_map<Pos, Pos, HashPos> came_from { {start, start} };
+  unordered_map<Pos, Pos, HashPos> came_from { {start_pos, start_pos} };
 
-  unordered_map<Pos, int, HashPos> cost_so_far { {start, 0} };
+  unordered_map<Pos, int, HashPos> cost_so_far { {start_pos, 0} };
 
   int winner = 999999;
 
@@ -65,7 +65,7 @@ int human_function(
 /////////////////////////////////////////////////////////////////////////////////
 
 int mouse_function(
-  Pos start,
+  Pos start_pos,
   vector<int> const (&mouse_field)[],
   int max_turns,
   int height,
@@ -76,13 +76,13 @@ int mouse_function(
 
   priority_queue<MouseNode, vector<MouseNode>, PrioritiseNode> frontier;
 
-  MouseNode first_node(mouse_field[start.y][start.x], start);
+  MouseNode first_node(mouse_field[start_pos.y][start_pos.x], start_pos);
 
   frontier.push(first_node);
 
-  unordered_map<Pos, Pos, HashPos> came_from { {start, start} };
+  unordered_map<Pos, Pos, HashPos> came_from { {start_pos, start_pos} };
 
-  unordered_map<Pos, pair<int, bool>, HashPos> cost_so_far { {start, {0, 0}} };
+  unordered_map<Pos, pair<int, bool>, HashPos> cost_so_far { {start_pos, {0, 0}} };
 
   int winner = 999999;
 

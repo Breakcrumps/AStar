@@ -9,16 +9,12 @@ using std::vector;
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
-bool reached_the_finish(
-  Node const (&current_node)
-)
+bool reached_the_finish(Node const (&current_node))
 {
   return current_node.heuristic == 0;
 }
 
-bool reached_the_finish(
-  MouseNode const (&current_node)
-)
+bool reached_the_finish(MouseNode const (&current_node))
 {
   return current_node.heuristic == 0;
 }
@@ -26,23 +22,21 @@ bool reached_the_finish(
 /////////////////////////////////////////////////////////////////////////////////
 
 bool pos_exists(
-  Pos current,
-  Pos move,
+  Pos next_pos,
   int length, int height
 )
 {
   return
-    current.x + move.x >= 0 and current.x + move.x < length
-    and current.y + move.y >= 0 and current.y + move.y < height;
+    next_pos.x >= 0 and next_pos.x < length
+    and next_pos.y >= 0 and next_pos.y < height;
 }
 
 /////////////////////////////////////////////////////////////////////////////////
 
 bool pos_is_a_wall(
   vector<int> const (&field)[],
-  Pos current,
-  Pos move
+  Pos next_pos
 )
 {
-  return field [current.y + move.y] [current.x + move.x] < 0;
+  return field [next_pos.y] [next_pos.x] < 0;
 }

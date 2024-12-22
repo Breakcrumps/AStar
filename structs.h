@@ -17,6 +17,11 @@ struct Pos
   {
     return x == other.x and y == other.y;
   }
+
+  Pos operator+(Pos other) const
+  {
+    return { x + other.x, y + other.y };
+  }
 };
 
 /////////////////////////////////////////////////////////////////////////////////
