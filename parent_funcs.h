@@ -60,8 +60,6 @@ int human_function(
   return winner;
 }
 
-/////////////////////////////////////////////////////////////////////////////////
-
 int mouse_function(
   Pos start_pos,
   vector<int> const (&mouse_field)[],

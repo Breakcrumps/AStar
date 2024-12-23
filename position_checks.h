@@ -36,8 +36,6 @@ bool human_pos_is_good(
   return true;
 }
 
-/////////////////////////////////////////////////////////////////////////////////
-
 bool human_second_pos_is_good(
   vector<int> const (&human_field)[],
   Pos next_pos,
@@ -48,8 +46,6 @@ bool human_second_pos_is_good(
     pos_exists(next_pos, length, height)
     and not pos_is_a_wall(human_field, next_pos);
 }
-
-/////////////////////////////////////////////////////////////////////////////////
 
 bool mouse_pos_is_good(
   vector<int> const (&mouse_field)[],

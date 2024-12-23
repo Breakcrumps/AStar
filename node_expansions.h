@@ -15,6 +15,8 @@ using std::priority_queue, std::vector, std::unordered_map;
 
 Pos moves[4] { {1, 0}, {0, 1}, {-1, 0}, {0, -1} };
 
+/////////////////////////////////////////////////////////////////////////////////
+
 void expand_human_node(
   vector<int> const (&human_field)[],
   priority_queue<Node, vector<Node>, PrioritiseNode>& frontier,
@@ -57,8 +59,6 @@ void expand_human_node(
     cost_so_far[second_next.pos] = second_next.turn;
   }
 }
-
-/////////////////////////////////////////////////////////////////////////////////
 
 void expand_mouse_node(
   vector<int> const (&mouse_field)[],

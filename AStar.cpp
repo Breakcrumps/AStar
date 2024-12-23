@@ -1,14 +1,12 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <queue>
 #include <time.h>
-#include <unordered_map>
-#include <fstream>
 #include "structs.h"
 #include "parent_funcs.h"
+#include "funcs_for_main.h"
 
-using std::vector, std::string, std::cin, std::cout;
+using std::vector, std::string, std::cin, std::cout, std::ostringstream;
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
@@ -51,29 +49,16 @@ int main()
 
   vector<int> human_field[height];
 
-  for (int y = 0; y < height; ++y)
-  {
-    for (int x = 0; x < length; ++x)
-    {
-      human_field[y].push_back(
-        field[y][x] != 'W'
-        ? (int)((abs(finish_pos.y - y) + 1) / 2) + (int)((abs(finish_pos.x - x) + 1) / 2)
-        : -1
-      );
-    }
-  }
+  fill_human_field(
+    field,
+    finish_pos,
+    height, length,
+    human_field
+  );
 
   cout << '\n';
 
-  for (vector<int> i : human_field)
-  {
-    for (int s : i)
-    {
-      cout << s << ' ';
-    }
-    cout << '\n';
-  }
-  cout << '\n';
+  cout << format_field(human_field, height);
 
   // double start_time = clock() / CLOCKS_PER_SEC;
 
@@ -91,45 +76,20 @@ int main()
 
   vector<int> mouse_field[height];
 
-  for (int y = 0; y < height; ++y)
-  {
-    for (int x = 0; x < length; ++x)
-    {
-      mouse_field[y].push_back
-      (
-        field[y][x] != 'W'
-        ? abs(finish_pos.y - y) + abs(finish_pos.x - x)
-        : -(abs(finish_pos.y - y) + abs(finish_pos.x - x))
-      );
-    }
-  }
+  fill_mouse_field(field, finish_pos, height, length, mouse_field);
 
-  for (vector<int> i : mouse_field)
-  {
-    for (int s : i)
-    {
-      cout << s << ' ';
-    }
-    cout << '\n';
-  }
-  cout << '\n';
+  cout << format_field(mouse_field, height);
 
-  int mouse_moves = mouse_function(mouse_pos, mouse_field, (height * length) - 1, height, length);
+  int mouse_moves = mouse_function(
+    mouse_pos,
+    mouse_field,
+    (height * length) - 1,
+    height, length
+  );
 
   cout << mouse_moves << "\n\n";
   
-  if (human_moves > mouse_moves)
-  {
-    cout << "MOUSE\n";
-  }
-  else if (human_moves < mouse_moves)
-  {
-    cout << "HUMAN\n";
-  }
-  else
-  {
-    cout << "DRAW\n";
-  }
+  cout << results(human_moves, mouse_moves);
 
   return 0;
 }
