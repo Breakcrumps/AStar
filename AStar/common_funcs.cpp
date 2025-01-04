@@ -1,0 +1,35 @@
+#include <vector>
+#include "structs.h"
+#include "common_funcs.h"
+
+using std::vector;
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
+bool reached_the_finish(Node const (&current_node))
+{
+  return current_node.heuristic == 0;
+}
+
+bool reached_the_finish(MouseNode const (&current_node))
+{
+  return current_node.heuristic == 0;
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+
+bool pos_exists(Pos next_pos, int length, int height)
+{
+  return
+    next_pos.x >= 0 and next_pos.x < length
+    and next_pos.y >= 0 and next_pos.y < height;
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+
+bool pos_is_a_wall(vector<int> const (&field)[], Pos next_pos)
+{
+  return field [next_pos.y] [next_pos.x] < 0;
+}

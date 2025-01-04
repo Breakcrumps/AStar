@@ -1,0 +1,1 @@
+g++ AStar/*.cpp -o program && program

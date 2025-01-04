@@ -1,0 +1,53 @@
+#pragma once
+
+using std::size_t;
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
+struct Pos
+{
+  int x, y;
+
+  bool operator==(Pos other) const;
+  Pos operator+(Pos other) const;
+};
+
+/////////////////////////////////////////////////////////////////////////////////
+
+struct HashPos
+{
+  size_t operator() (Pos pos) const;
+};
+
+/////////////////////////////////////////////////////////////////////////////////
+
+struct Node
+{
+  int heuristic;
+  Pos pos;
+  int turn;
+
+  Node(int heuristic, Pos pos, int turn);
+  Node(int heuristic, Pos pos);
+};
+
+struct MouseNode
+{
+  int heuristic;
+  Pos pos;
+  int turn;
+  bool climbed;
+  
+  MouseNode(int heuristic, Pos pos);
+  MouseNode(int heuristic, Pos pos, int turn, bool climbed);
+};
+
+/////////////////////////////////////////////////////////////////////////////////
+
+struct PrioritiseNode
+{
+  bool operator()(Node first, Node second) const;
+  bool operator()(MouseNode first, MouseNode second) const; 
+};
